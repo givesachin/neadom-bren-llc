@@ -1095,23 +1095,36 @@
   <script>
     $("#contactform").submit(function(event) 
     {
-        /* stop form from submitting normally */
-        event.preventDefault();
+      // prevent default posting of form
+      event.preventDefault();
 
-        /* get some values from elements on the page: */
-        var $form = $( this ),
-            $submit = $form.find( 'button[type="submit"]' ),
-            name_value = $form.find( 'input[name="name"]' ).val(),
-            email_value = $form.find( 'input[name="email"]' ).val(),
-            message_value = $form.find( 'textarea[name="message"]' ).val(),
-            url = $form.attr('action');
+      if (request) {
+        request.abort();
+      }
+      // setup some local variables
 
-        /* Send the data using post */
-        var posting = $.post( url, { 
-                          name: name_value, 
-                          email: email_value, 
-                          message: message_value 
-                      });
+      /* get some values from elements on the page: */
+      var $form = $( this ),
+              $submit = $form.find( 'button[type="submit"]' ),
+              name_value = $form.find( 'input[name="name"]' ).val(),
+              email_value = $form.find( 'input[name="email"]' ).val(),
+              message_value = $form.find( 'textarea[name="message"]' ).val(),
+              url = $form.attr('action');
+
+
+      // fire off the request to specific url
+
+      var request = $.ajax({
+        url : url,
+        type: "post",
+        data: {
+          name: name_value,
+          email: email_value,
+          message: message_value
+        }
+      });
+      // callback handler that will be called on success
+      request.done(function (response, textStatus, jqXHR){
         $("#response").removeClass("d-none")
         $("#response").addClass("show")
 
@@ -1127,19 +1140,12 @@
         $("#btn-field").removeClass("text-center")
         $("#btn-field").addClass("d-none")
 
-        // posting.done(function(data)
-        // {
-        //   console.log(data)
-          
-        //     /* Put the results in a div */
-        //     // $("#response").html(data);
+      });
 
-        //     /* Change the button text. */
-        //     $submit.text('Sent, Thank you');
-
-        //     /* Disable the button. */
-        //     $submit.attr("disabled", true);
-        // });
+      // callback handler that will be called on failure
+      request.fail(function (jqXHR, textStatus, errorThrown){
+          alert('Failed');
+      });
    });
 </script>
 
