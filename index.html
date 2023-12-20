@@ -31,7 +31,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  <script src="../code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
   <!-- =======================================================
   * Template Name: Medilab - v4.7.1
@@ -1093,8 +1093,13 @@
 <!-- }); -->
   </script>
   <script>
-    $("#contactform").submit(function(event) 
+    $( window ).on("load", function() {
+      $('#preloader').addClass('d-none');
+    });
+
+    $("#contactform").submit(function(event)
     {
+      $('#preloader').removeClass('d-none');
       // prevent default posting of form
       event.preventDefault();
 
@@ -1139,22 +1144,17 @@
 
         $("#btn-field").removeClass("text-center")
         $("#btn-field").addClass("d-none")
-
+        $('#preloader').addClass('d-none');
       });
 
       // callback handler that will be called on failure
       request.fail(function (jqXHR, textStatus, errorThrown){
           alert('Failed');
+        $('#preloader').addClass('d-none');
       });
    });
 </script>
 
-<script>
-;
-</script>
-
-
-  </script>
 
 </body> 
 
