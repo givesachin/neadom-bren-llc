@@ -481,7 +481,8 @@ body {
 #hero {
   overflow: hidden;	
   width: 100%;
-  height: 80vh;
+  /*height: 80vh;*/
+  aspect-ratio: 2;
   /* background: url("../img/banner1.jpg") top center; */
   /* background: url("../img/banner4.jpg") top center; */
   background-size: cover;
@@ -496,7 +497,7 @@ body {
 
 #hero .container {
   width: 100%;
-  height:50vh;
+  /*height:50vh;*/
   /* margin-top: 4rem; */
   /* position: right; */
   
@@ -546,7 +547,8 @@ body {
 @media (max-width: 992px) {
   #hero {
     margin-bottom: 0;
-    height: auto;
+    /*height: auto;*/
+    aspect-ratio: 1.5;
   }
   #hero .container {
     margin-top: 1.5rem;
